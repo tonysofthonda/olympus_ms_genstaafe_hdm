@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +18,33 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.honda.olympus.service.NotificationService;
+import com.honda.olympus.utils.GenstaafeConstants;
+import com.honda.olympus.vo.MessageVO;
 import com.honda.olympus.vo.ResponseVO;
 
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-
+	@Value("${service.name}")
+	private String serviceName;
+	
+	@Value("${spring.datasource.url}")
+	private String host;
+	
+	@Value("${spring.datasource.username}")
+	private String user;
+	
+	@Autowired
+	NotificationService notificationService;
+	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
 
-		List<String> details = new ArrayList<>();
-
-		details.add(ex.getLocalizedMessage());
-		ResponseVO error = new ResponseVO(2,"Unknown", "");
+		String notificationMessage = String.format( "No es posbile conectarse a la base de datos: %s User: %s", host,user);
+		MessageVO message = new MessageVO(serviceName, GenstaafeConstants.ZERO_STATUS,notificationMessage , "");
+		notificationService.generatesNotification(message);
+		
+		ResponseVO error = new ResponseVO(serviceName,0L,"Unknown", "");
 
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -54,7 +71,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		List<String> details = new ArrayList<>();
 		
 		details.add(ex.getLocalizedMessage());
-		ResponseVO error = new ResponseVO(0,ex.getLocalizedMessage(), "");
+		ResponseVO error = new ResponseVO(serviceName,GenstaafeConstants.ZERO_STATUS,ex.getLocalizedMessage(), "");
 		
 		return new ResponseEntity<>(error,HttpStatus.INTERNAL_SERVER_ERROR);
 	}

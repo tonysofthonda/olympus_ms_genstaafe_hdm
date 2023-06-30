@@ -8,10 +8,11 @@ import org.springframework.data.repository.query.Param;
 
 import com.honda.olympus.dao.AfeModelColorEntity;
 
+
 public interface AfeModelColorRepository extends JpaRepository<AfeModelColorEntity, Long>{
 	
-	// QUERY3
-		@Query("SELECT o FROM AfeModelColorEntity o WHERE o.id = :id ")
-		List<AfeModelColorEntity> findAllById(@Param("id") Long id);
+	// QUERY2
+			@Query("SELECT o FROM AfeModelColorEntity o WHERE o.modelId = :modelId ")
+			List<AfeModelColorEntity> findAllByModelId(@Param("modelId") Long modelId);
 
 }

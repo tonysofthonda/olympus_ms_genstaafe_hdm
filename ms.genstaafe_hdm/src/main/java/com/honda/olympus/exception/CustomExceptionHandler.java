@@ -40,12 +40,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
 
-		String notificationMessage = String.format( "No es posbile conectarse a la base de datos: %s User: %s", host,user);
+		String notificationMessage = "106 Error al guardar en MFT. No es posible conectarse a la base de datos";
 		MessageVO message = new MessageVO(serviceName, GenstaafeConstants.ZERO_STATUS,notificationMessage , "");
 		notificationService.generatesNotification(message);
 		
 		ResponseVO error = new ResponseVO(serviceName,0L,"Unknown", "");
-
+		
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 

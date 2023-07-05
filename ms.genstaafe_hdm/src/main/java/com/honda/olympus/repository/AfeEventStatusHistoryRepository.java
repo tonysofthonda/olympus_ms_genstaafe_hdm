@@ -12,8 +12,8 @@ import com.honda.olympus.dao.AfeEventStatusHistoryEntity;
 @Repository
 public interface AfeEventStatusHistoryRepository extends JpaRepository<AfeEventStatusHistoryEntity, Long>{
 
-	// QUERY3
-		@Query("SELECT o FROM AfeEventStatusHistoryEntity o WHERE o.afeEventStatusId = :afeEventStatusId  order by asc o.id ")
+	// QUERY8
+		@Query("SELECT o FROM AfeEventStatusHistoryEntity o WHERE o.afeEventStatusId = :afeEventStatusId  ORDER BY  o.id ASC ")
 		List<AfeEventStatusHistoryEntity> findAllByCode(@Param("afeEventStatusId") Long afeEventStatusId);
 	
 }

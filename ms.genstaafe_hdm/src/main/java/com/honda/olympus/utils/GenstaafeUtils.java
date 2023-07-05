@@ -42,11 +42,10 @@ public class GenstaafeUtils {
 		LocalDateTime now = LocalDateTime.now();
 		int hour = now.getHour();
 		int minute = now.getMinute();
-		int second = now.getSecond();
-
+		
 		return new StringBuilder().append(GenstaafeConstants.ACK_PREFIX)
 				.append(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)).append(hour).append(minute)
-				.append(second).append(GenstaafeConstants.FILE_EXT).toString();
+				.append(GenstaafeConstants.FILE_EXT).toString();
 	}
 
 	public static void checkFileIfWriteFile(String route, String fileName, String newLine) throws GenstaafeException {
@@ -60,7 +59,7 @@ public class GenstaafeUtils {
 			if (!Files.exists(path)) {
 
 				Files.createFile(path);
-				System.out.println("File created");
+				log.debug("File created");
 
 			}
 
@@ -68,7 +67,7 @@ public class GenstaafeUtils {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(e.getLocalizedMessage());
+			log.debug(e.getLocalizedMessage());
 			throw new GenstaafeException("Error creating/writing file");
 		}
 	}
@@ -77,7 +76,7 @@ public class GenstaafeUtils {
 
 		try {
 
-			ClassPathResource staticDataResource = new ClassPathResource("genackafeFileTemplate.json");
+			ClassPathResource staticDataResource = new ClassPathResource("genstaafeFileTemplate.json");
 			File file = staticDataResource.getFile();
 			log.info("Resource FileName: {}", staticDataResource.getFilename());
 
@@ -172,6 +171,10 @@ public class GenstaafeUtils {
 	
 	public static String formatDateTimeStamp(Date date) {
 		String pattern = "yyyy-MM-dd";
+		
+		if(date == null) {
+		 return "";
+		}
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		return simpleDateFormat.format(date);
 	}

@@ -12,7 +12,7 @@ import com.honda.olympus.dao.AfeModelColorEntity;
 public interface AfeModelColorRepository extends JpaRepository<AfeModelColorEntity, Long>{
 	
 	// QUERY2
-			@Query("SELECT o FROM AfeModelColorEntity o WHERE o.modelId = :modelId ")
-			List<AfeModelColorEntity> findAllByModelId(@Param("modelId") Long modelId);
+			@Query("SELECT o FROM AfeModelColorEntity o WHERE o.id = :id ")
+			List<AfeModelColorEntity> findAllByModelId(@Param("id") Long id);
 
 }

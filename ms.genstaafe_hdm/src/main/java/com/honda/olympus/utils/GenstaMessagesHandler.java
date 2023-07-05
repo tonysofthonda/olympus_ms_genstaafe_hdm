@@ -30,9 +30,9 @@ public class GenstaMessagesHandler {
 	private static final String MODEL_NO_EXIST = "No existe el model_id: %s en la tabla AFE_MODEL para el fixed_order_id: %s con el query: %s";
 	private static final String PLANT_NO_EXISTS = "No existe el plant id: %s en la tabla AFE_PLANT para el fixed_order_id: %s con el query: %s";
 	private static final String DIVISION_NO_EXISTS = "No existe el division id: %s en la tabla AFE_DIVISION para el fixed_order_id: %s con el query: %s";
-	private static final String COLOR_NO_EXISTS = "No existe el colo id: %s para el fixed_order_id: %s con el query: %s";
+	private static final String COLOR_NO_EXISTS = "No existe el color_id: %s para el fixed_order_id: %s con el query: %s";
 	private static final String AFE_EVENT_NO_EXISTS = "No existe el status en la tabla AFE_EVENT_STATUS para el fixed_order_id: %s con el query: %s";
-	private static final String AFE_EVENT_STATUS_HISTORY_NO_EXISTS = "No existe el historico en la tabla AFE_EVENT_STATUS_HISTORY con el query %s para el fixed_order_id: %s con el query: %s";	
+	private static final String AFE_EVENT_STATUS_HISTORY_NO_EXISTS = "No existe el historico del status en la tabla AFE_EVENT_STATUS_HISTORY para el fixed_order_id: %s con el query: %s";	
 	private static final String AFE_EVENT_CODE_NO_EXISTS = "No existe el codigo del evento %s para el fixed_order_id: %s";
 	private static final String ACTION_SUCCESS = "Inserción exitosa de la línea %s en la tabla AFEfIXED_ORDER_EV y en la tabla AFE_ORDER_HISTORY";
 	
@@ -74,9 +74,9 @@ public class GenstaMessagesHandler {
 	}
 	
 
-	public void createAndLogMessageModelNoExist(Long modelId,String query) {
+	public void createAndLogMessageModelNoExist(Long modelId,Long fixedOrderId,String query) {
 
-		this.message = String.format(MODEL_NO_EXIST, modelId, query);
+		this.message = String.format(MODEL_NO_EXIST, modelId,fixedOrderId,query);
 		this.event = new EventVO(serviceName, GenstaafeConstants.ZERO_STATUS, message, "");
 
 		sendAndLog();

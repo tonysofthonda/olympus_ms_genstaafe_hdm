@@ -31,10 +31,10 @@ public class LogEventService {
 			ResponseEntity<String> responseEntity = restTemplate.postForEntity(notificationURI, requestEntity,
 					String.class);
 
-			log.debug("Genstaafe:: LogEvent created with Status Code: " + responseEntity.getStatusCode());
-			log.debug("Genstaafe:: Message: " + responseEntity.getBody());
+			log.debug("Genstaafe:: LogEvent created with Status Code: {}",responseEntity.getStatusCode());
+			log.debug("Genstaafe:: Message: {}",responseEntity.getBody());
 		} catch (Exception e) {
-			log.debug("Genstaafe:: Error calling logEvent service "+e.getLocalizedMessage());
+			log.error("Genstaafe:: Error calling logEvent service due to: {}",e.getLocalizedMessage());
 		}
 
 	}

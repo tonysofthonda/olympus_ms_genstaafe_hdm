@@ -39,12 +39,8 @@ public class GenstaafeUtils {
 
 	public static String getFileName() {
 
-		LocalDateTime now = LocalDateTime.now();
-		int hour = now.getHour();
-		int minute = now.getMinute();
-		
 		return new StringBuilder().append(GenstaafeConstants.ACK_PREFIX)
-				.append(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)).append(hour).append(minute)
+				.append(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE))
 				.append(GenstaafeConstants.FILE_EXT).toString();
 	}
 
@@ -78,7 +74,7 @@ public class GenstaafeUtils {
 
 			ClassPathResource staticDataResource = new ClassPathResource("genstaafeFileTemplate.json");
 			File file = staticDataResource.getFile();
-			log.info("Resource FileName: {}", staticDataResource.getFilename());
+			log.debug("Resource FileName: {}", staticDataResource.getFilename());
 
 			InputStream inputStream = new FileInputStream(file);
 			StringBuilder responseStrBuilder = new StringBuilder();

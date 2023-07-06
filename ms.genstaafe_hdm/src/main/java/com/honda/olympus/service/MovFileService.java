@@ -21,8 +21,8 @@ public class MovFileService {
 
 	public void sendMoveFileMessage(MoveFileVO message) {
 		try {
-			log.info("Calling MoveFile service");
-			log.info(message.toString());
+			log.debug("Calling MoveFile service");
+			log.debug(message.toString());
 			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -33,10 +33,10 @@ public class MovFileService {
 			ResponseEntity<String> responseEntity = restTemplate.postForEntity(moveFileURI, requestEntity,
 					String.class);
 
-			log.info("MoveFile called with Status Code: {}",responseEntity.getStatusCode());
-			log.info("Message: " + responseEntity.getBody());
+			log.debug("MoveFile called with Status Code: {}",responseEntity.getStatusCode());
+			log.debug("Message: " + responseEntity.getBody());
 		} catch (Exception e) {
-			log.info("Error calling MoveFIle service {}",e.getLocalizedMessage());
+			log.error("Error calling MoveFIle service due to: {}",e.getLocalizedMessage());
 		}
 
 	}

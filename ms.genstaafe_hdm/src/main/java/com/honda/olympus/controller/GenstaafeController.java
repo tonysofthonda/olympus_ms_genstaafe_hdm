@@ -4,11 +4,14 @@ package com.honda.olympus.controller;
 
 import java.io.IOException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@Validated
 public class GenstaafeController {
 	@Value("${service.success.message}")
 	private String responseMessage;
@@ -45,9 +49,9 @@ public class GenstaafeController {
 	private GenstaafeService genackafeService;
 
 	@PostMapping(path = "/event", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseVO> generateAckowledment(@RequestBody MessageEventVO message)
+	public ResponseEntity<ResponseVO> generateAckowledment(@Valid @RequestBody MessageEventVO message)
 			throws GenstaafeException, FileProcessException, IOException {
-		log.info(message.toString());
+		log.debug(message.toString());
 		
 		
 		GenAckResponseVO response = genackafeService.createStatus(message);
@@ -55,7 +59,8 @@ public class GenstaafeController {
 			return new ResponseEntity<>(new ResponseVO(serviceName,GenstaafeConstants.ONE_STATUS, responseMessage, response.getFileName()), HttpStatus.OK);
 		}
 
-		return new ResponseEntity<>(new ResponseVO(serviceName,GenstaafeConstants.ZERO_STATUS, "No puede insertar lineas al archivo: "+response.getFileName(), response.getFileName()), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(new ResponseVO(serviceName,GenstaafeConstants.ZERO_STATUS, 
+				"No se encontraron líneas con suficiente información para ser procesadas ", response.getFileName()), HttpStatus.BAD_REQUEST);
 		
 	}
 

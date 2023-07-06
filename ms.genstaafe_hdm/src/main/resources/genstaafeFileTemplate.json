@@ -141,11 +141,11 @@
       "Description": "GM-ORD-STA-CURR_EVENT-STAT-DT"
     },
     {
-      "field": "GM-ORD-STAK-DLR-REC-BUS-AST-DT",
+      "field": "GM-ORD-STAK-DLR-REC-BUS-AST-CD",
       "Spaces": 11,
       "Position_start": 178,
       "Position_end": 188,
-      "Description": "GM-ORD-STAK-DLR-REC-BUS-AST-DT"
+      "Description": "GM-ORD-STAK-DLR-REC-BUS-AST-CD"
     },
     {
       "field": "GM-ORD-ACK-CURR-VEH-EVNT-DESC",

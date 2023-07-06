@@ -13,8 +13,8 @@ import com.honda.olympus.dao.AfeEventStatusEntity;
 @Repository
 public interface AfeEventStatusRepository extends JpaRepository<AfeEventStatusEntity, Long> {
 
-	// QUERY9
-	@Query("SELECT o FROM AfeEventStatusEntity o WHERE o.fixedOrderId = :fixedOrderId ")
+	// QUERY7
+	@Query("SELECT o FROM AfeEventStatusEntity o WHERE o.fixedOrderId = :fixedOrderId ORDER BY o.id DESC")
 	public List<AfeEventStatusEntity> findAllByFixedOrder(@Param("fixedOrderId") Long fixedOrderId);
 
 }

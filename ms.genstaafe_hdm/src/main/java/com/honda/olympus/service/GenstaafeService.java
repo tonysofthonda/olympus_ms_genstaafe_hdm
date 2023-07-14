@@ -230,7 +230,7 @@ public class GenstaafeService {
 			if (!afePlant.isPresent()) {
 
 				genstaMessagesHandler.createAndLogMessagePlantNoExist(divisionIdQ3, fixedOrderId,
-						"SELECT * FROM AFE_DIVISION WHERE ID = :plantIdQ3 ");
+						"SELECT * FROM AFE_PLANT WHERE ID = :plantIdQ3 ");
 				continue;
 			}
 

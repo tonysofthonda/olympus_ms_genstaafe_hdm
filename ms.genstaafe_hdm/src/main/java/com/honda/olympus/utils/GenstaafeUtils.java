@@ -39,7 +39,7 @@ public class GenstaafeUtils {
 
 	public static String getFileName() {
 
-		return new StringBuilder().append(GenstaafeConstants.ACK_PREFIX)
+		return new StringBuilder().append(GenstaafeConstants.STA_PREFIX)
 				.append(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE))
 				.append(GenstaafeConstants.FILE_EXT).toString();
 	}
